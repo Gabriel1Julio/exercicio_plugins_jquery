@@ -6,11 +6,20 @@ $(document).ready(function(){
     $('#cep').mask('00000-000', {
         placeholder: '00000-000'
     });
+    
+    $('#cpf').mask('000.000.000-00', {
+        placeholder: '000.000.000-00'
+    });
 
     $.validator.addMethod("CEP", function(cep_number, element) {
         cep_number = cep_number.replace(/\D/g, ""); 
         return cep_number.length == 8;
     }, "Por favor, insira um número de CEP válido");
+    
+    $.validator.addMethod("CPF", function(cpf_number, element) {
+        cpf_number = cpf_number.replace(/\D/g, ""); 
+        return cpf_number.length == 11;
+    }, "Por favor, insira um número de CPF válido");
 
     $.validator.addMethod("phoneBR", function(phone_number, element) {
         phone_number = phone_number.replace(/\D/g, ""); 
@@ -41,6 +50,10 @@ $(document).ready(function(){
             cep: {
                 required: true,
                 CEP: true
+            },
+            cpf: {
+                required: true,
+                CPF: true
             }
         }, 
         messages: {
@@ -48,7 +61,8 @@ $(document).ready(function(){
             telefone: 'Por favor, insira corretamente seu número de telefone',
             email: 'Por favor, insira corretamente seu E-mail',
             endereco: 'Por favor, insira corretamente seu endereço',
-            cep: 'Por favor, insira corretamente seu CEP'
+            cep: 'Por favor, insira corretamente seu CEP',
+            cpf: "Por favor, insira um número de CPF válido"
         },
         submitHandler: function(form){
             alert('Formulário enviado com sucesso!');
